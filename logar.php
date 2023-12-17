@@ -18,12 +18,8 @@ if (isset($_GET['email']) && isset($_GET['password'])) {
 
 function autenticarUsuario($email, $password) {
     $conn = conectar();
-    $result = $conn->query("SELECT * FROM usuarios WHERE email='$email' and senha='$password'");
-    $dados = array();
-    foreach ($result as $row) {
-        $dados[] = $row;
-    }
-    if(count($dados) > 0) {
+    $result = $conn->query("SELECT * FROM usuarios WHERE email='$email' and senha='$password'")->fetch(PDO::FETCH_OBJ);
+    if($result != false) {
         return true;
     }
     return false;

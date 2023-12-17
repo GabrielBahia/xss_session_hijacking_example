@@ -1,3 +1,16 @@
+<?php
+    include "conn.php";
+
+    $conn = conectar();
+    if (isset($_COOKIE['access_token']) && strlen($_COOKIE['access_token']) > 0) {
+        $access_token = $_COOKIE['access_token'];
+        $result = $conn->query("SELECT * FROM usuarios WHERE access_token='$access_token'")->fetch(PDO::FETCH_OBJ);
+        if ($result != null) {
+            header('Location: adm.php');
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
@@ -145,5 +158,4 @@
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test($("#login input[name=email]").val());
     }
-    
 </script>

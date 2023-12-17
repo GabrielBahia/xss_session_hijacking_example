@@ -1,10 +1,13 @@
 <?php 
 include "conn.php";
 
-// Verificar se tem o access_token em cokkie e comparar no banco
-// Se for diferente voltar paara tela de login
-
 $conn = conectar();
+$access_token = $_COOKIE['access_token'];
+$result = $conn->query("SELECT * FROM usuarios WHERE access_token='$access_token'")->fetch(PDO::FETCH_OBJ);
+if($result == false) {
+  header('Location: login.php');
+}
+
 $usuarios = queryGETAll($conn, "usuarios");
 ?>
 
