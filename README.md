@@ -1,0 +1,2 @@
+# xss_session_hijacking_example
+xss_session_hijacking_example
