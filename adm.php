@@ -22,6 +22,11 @@ $usuarios = queryGETAll($conn, "usuarios");
 <body>
 <div class="block">
     <div><h2>Painel Adm</h2></div>
+
+    <form action="logout.php">
+      <button class="logout" type="submit">Sair</button>
+    </form>
+
     <div class="table-block">
         <div class="titleTable">
             <h3>Lista de Usuários</h3>
@@ -32,21 +37,26 @@ $usuarios = queryGETAll($conn, "usuarios");
               <th scope="col">Nome</th>
               <th scope="col">Email</th>
               <th scope="col">Foto</th>
+              <th scope="col">Tornar Adm</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach($usuarios as $usuario) {?>
             <tr>
-              <td><?= $usuario['nome'] ?></td>
-              <td><?= $usuario['email'] ?></td>
-              <td><img style="width:50px;" src='<?= $usuario['imagem_url'] ?>' alt="Foto de perfil"></td>
+              <form action="/tornar-adm.php">
+                <input name="id" value=<?= $usuario['id'] ?> hidden></input>
+                <td><?= $usuario['nome'] ?></td>
+                <td><?= $usuario['email'] ?></td>
+                <td><img style="width:50px;" src='<?= $usuario['imagem_url'] ?>' alt="Foto de perfil"></td>
+                <td><button type="submit">!</button></td>
+              </form>
             </tr>
             <?php } ?>
           </tbody>
-        </table>
-    </div>
-
-</div>
+        </div>
+        
+      </div>
+    </table>
 
 </body>
 </html>

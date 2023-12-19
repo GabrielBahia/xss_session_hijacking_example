@@ -18,8 +18,8 @@ if (isset($_GET['email']) && isset($_GET['password'])) {
 
 function autenticarUsuario($email, $password) {
     $conn = conectar();
-    $result = $conn->query("SELECT * FROM usuarios WHERE email='$email' and senha='$password'")->fetch(PDO::FETCH_OBJ);
-    if($result != false) {
+    $result = $conn->query("SELECT * FROM usuarios WHERE email='$email' and senha='$password'")->fetch(PDO::FETCH_OBJ);    
+    if($result != false && isset($result->is_admin) && boolval($result->is_admin) == true) {
         return true;
     }
     return false;
